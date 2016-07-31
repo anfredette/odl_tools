@@ -7,7 +7,14 @@ sleep 5
 neutron router-create ext-rtr
 neutron router-gateway-set ext-rtr ext-net
 
-neutron net-create vx-net --provider:network_type vxlan --provider:segmentation_id 1500
-neutron subnet-create vx-net 10.100.5.0/24 --name vx-subnet --dns-nameserver 8.8.8.8
+neutron net-create vx-net0 --provider:network_type vxlan --provider:segmentation_id 1500
+neutron subnet-create vx-net0 10.100.5.0/24 --name vx-subnet0 --dns-nameserver 8.8.8.8
 sleep 5
-neutron router-interface-add ext-rtr vx-subnet
+neutron router-interface-add ext-rtr vx-subnet0
+
+sleep 5
+neutron net-create vx-net1 --provider:network_type vxlan --provider:segmentation_id 1501
+neutron subnet-create vx-net1 10.100.6.0/24 --name vx-subnet1 --dns-nameserver 8.8.8.8
+sleep 5
+neutron router-interface-add ext-rtr vx-subnet1
+
